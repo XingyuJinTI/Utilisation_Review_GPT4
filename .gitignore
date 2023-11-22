@@ -1,2 +1,5 @@
-# Output json file
+# Output json files
 *.json
+
+# Input medical report pdfs
+*.pdf

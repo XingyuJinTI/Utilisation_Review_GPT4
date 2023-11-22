@@ -50,3 +50,42 @@ python run.py [pdf_path]
 pdf_path (optional): Path to the medical record PDF file. If not provided, the script uses 'medical-record.pdf' as the default.
 
 The result will be save `patient_data.json`
+
+## Docker Setup (Alternative)
+### Prerequisites
+Docker installed on your machine. [Install Docker](https://docs.docker.com/get-docker/)
+
+### Building the Docker Image
+To containerize the application, build the Docker image using the provided Dockerfile.
+
+**1. Navigate to the Project Directory:**
+
+Ensure you are in the root directory of the cloned repository.
+
+**2. Build the Docker Image:**
+Run the following command to create the Docker image:
+```sh
+docker build -t utilization-review-gpt4 .
+```
+This command creates an image named utilization-review-gpt4.
+
+### Running the Application Using Docker
+
+**1. Run the Docker Container:**
+Execute the following command to run the application:
+
+```sh
+docker run -p 4000:80 -v /path/to/your/project:/usr/src/app/ -v /path/to/your/medical-record.pdf:/usr/src/app/medical-record.pdf -e OPENAI_API_KEY='<your-API-key>' utilization-review-gpt4
+```
+- Replace /path/to/your/project with the absolute path to your project directory. 
+- Replace /path/to/your/medical-record.pdf with the absolute path to your medical record pdf. 
+- Replace `<your-API-key>` with your OpenAI API Key.
+
+This command mounts your project directory to the container, passes your API keys to container environment and starts the application.
+
+### Accessing the Output
+The output JSON file (patient_data.json) will be saved in your project directory.
+
+
+### Notes
+The -p 4000:80 option maps port 80 inside the container to port 4000 on your host machine. Adjust this as per your requirements.
